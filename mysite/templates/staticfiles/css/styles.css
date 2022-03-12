@@ -1,0 +1,21 @@
+.style1{
+    font-family: Arial;
+    background-color: purple;
+    text-align: center;
+    text-decoration: blink;
+}
+
+.style2{
+    border-bottom: 1px solid green;
+    font-family: "Times New Roman";
+    font-weight: bold;
+    padding-top: 12px;
+    width: 800px;
+    overflow: visible;
+    font-size: 19px;
+    height: 100px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+}

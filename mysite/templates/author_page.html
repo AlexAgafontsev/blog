@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <article>
+        <h1>{{author.name}}</h1>
+        <p>{{ author.description }}</p>
+        <hr>
+    <h2>More Posts</h2>
+        <hr>
+{% for post in author.post_set.all %}
+    <article>
+        <h3><a href="http://127.00.00.1:8000/post/{{post.id}}">{{post.title}}</a></h3>
+    </article>
+    <hr>
+    {% endfor %}
+    </article>
+    <hr>
+{% endblock %}
