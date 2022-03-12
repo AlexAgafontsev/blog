@@ -8,7 +8,6 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     summary = models.TextField(max_length=2000)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null = True, blank=True)
-    images = models.ImageField(null = True, blank=True)
     date = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
