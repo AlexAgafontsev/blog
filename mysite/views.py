@@ -1,9 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
-from .models import Post
-from .forms import RegistrForm
 from django.contrib.auth.models import User
-from .models import Post, Author
+from .models import Post
 from .forms import RegistrForm
 
 
@@ -61,25 +58,15 @@ class PostUpdate(UpdateView):
     model = Post
     fields = ['title', 'summary']
 
-def author_page(request, pk):
-    context = {
-        'author': Author.objects.get(pk=pk)
-    }
-    return render(request, 'author_page.html', context)
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 
-class PostCreate(CreateView):
-    model = Post
-    fields = '__all__'
-    success_url = reverse_lazy ('blog')
 
 class PostUpdate(UpdateView):
     model = Post
-    fields = ['title', 'summary', 'images']
-
+    fields = ['title', 'summary']
     success_url = reverse_lazy ('blog')
 
 class PostDelete(DeleteView):

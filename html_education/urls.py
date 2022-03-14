@@ -24,9 +24,8 @@ urlpatterns = [
 urlpatterns += [
     path('', include('mysite.urls'))
 ]
-<<<<<<< HEAD
-=======
+
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
->>>>>>> origin/main
+
