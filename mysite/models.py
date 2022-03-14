@@ -1,23 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-<<<<<<< HEAD
+
 from django.contrib import auth
-=======
->>>>>>> origin/main
+
+
 
 
 class Post(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
     title = models.CharField(max_length=100)
     summary = models.TextField(max_length=2000)
-<<<<<<< HEAD
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE,
                               null=True)
     #images = models.ImageField(null = True, blank=True)
-=======
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null = True, blank=True)
->>>>>>> origin/main
     date = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
@@ -29,7 +26,7 @@ class Post(models.Model):
         """
         return self.title
 
-<<<<<<< HEAD
+
 #class Author(models.Model):
 #    id = models.AutoField(unique=True, primary_key=True)
 #    name = models.CharField(max_length=100)
@@ -49,7 +46,7 @@ class Post(models.Model):
 
 #class Comments(models.Model):
    # comment = models.TextField
-=======
+
 class Author(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
     name = models.CharField(max_length=100)
@@ -69,7 +66,7 @@ class Author(models.Model):
 
 class Comments(models.Model):
     comment = models.TextField
->>>>>>> origin/main
+
 
 
 
