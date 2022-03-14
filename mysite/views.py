@@ -90,7 +90,7 @@ def registr(request):
             # Передача надписи, если прошло всё успешно
             data['res'] = "Всё прошло успешно"
             # Рендаринг страницы
-            return redirect('')
+            return redirect('home')
             return render(request, 'registration/registration.html', data)
         else:
             return redirect('reg')
