@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <br>
+    <br>
+    <br>
+    <article>
+    <h1>Profile</h1>
+        <h1>{{user.username}}</h1>
+    </article>
+    <hr>
+        <p><a class="btn btn-secondary btn-sm" href="/accounts/password_reset">reset password</a></p>
+    {% endif %}
+{% endblock %}
+
+

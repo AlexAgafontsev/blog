@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Post</h1>
+    <br>
+    <article>
+        <h1>{{post.title}}</h1><p align="right"><a href="/user/{{post.author.id}}">{{ post.author }}</a></p>
+        <p>{{ post.summary }}</p>
+        <p align="right">{{ post.date }}</p>
+    </article>
+    <hr>
+    <a href="delete">delete</a>/<a href="update">Update</a>
+{% endblock %}
