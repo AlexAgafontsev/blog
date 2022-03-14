@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 
 {% block title %}blog{% endblock %}
 {% block content %}
@@ -17,6 +18,11 @@
 
     {% if user.is_authenticated %}
           <h1>Post List</h1>
+=======
+{% block title %}blog{% endblock %}
+{% block content %}
+    <h1>Post List</h1>
+>>>>>>> origin/main
     <a href="post/create">Add post</a>
       {% for post in posts %}
           <br>
@@ -25,6 +31,7 @@
     </article>
     <hr>
       {% endfor %}
+<<<<<<< HEAD
         {% else %}
         <br>
         <br>
@@ -32,5 +39,7 @@
         <p size="17px">If you want to read posts, you should <a href="reg">register</a> or <a href="/accounts/login">login</a></p>
    {% endif %}
 
+=======
+>>>>>>> origin/main
 
 {% endblock %}
