@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from .models import Post
-from .forms import RegistrForm
+from .forms import RegistrForm, CommentForm
+from .models import Post, Comment
+from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -16,12 +20,30 @@ def blog(request):
     }
     return render(request, 'blog.html', context)
 
-def post_page(request, pk):
-    context = {
-        'post': Post.objects.get(pk=pk)
-    }
-    return render(request, 'post_page.html', context)
 
+def post_page(request, pk):
+    post = Post.objects.get(pk=pk)
+    # Список активных комментариев к этой записи
+    new_comment = None
+    if request.method == 'POST':
+        # Комментарий был опубликован
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Создайте объект Comment, но пока не сохраняйте в базу данных
+            new_comment = comment_form.save(commit=False)
+            # Назначить текущий пост комментарию
+            new_comment.post = post
+            new_comment.author = request.user
+            # Сохранить комментарий в базе данных
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    return render(request,
+                  'post_page.html',
+                  {'post': post,
+                   'comment' : Comment.objects.filter(post=pk),
+                   'new_comment': new_comment,
+                   'comment_form': comment_form})
 
 def all_users(request):
     context = {
@@ -40,10 +62,7 @@ def profile(request):
 
 
 
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from django.contrib import auth
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 class PostCreate(LoginRequiredMixin, CreateView):
@@ -53,17 +72,6 @@ class PostCreate(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-
-class PostUpdate(UpdateView):
-    model = Post
-    fields = ['title', 'summary']
-
-
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-
-
-
 class PostUpdate(UpdateView):
     model = Post
     fields = ['title', 'summary']
@@ -72,6 +80,12 @@ class PostUpdate(UpdateView):
 class PostDelete(DeleteView):
     model = Post
     success_url = reverse_lazy ('blog')
+
+
+
+
+
+
 
 # Функция регистрации
 def registr(request):
@@ -90,7 +104,7 @@ def registr(request):
             # Передача надписи, если прошло всё успешно
             data['res'] = "Всё прошло успешно"
             # Рендаринг страницы
-            return redirect('')
+            return redirect('home')
             return render(request, 'registration/registration.html', data)
         else:
             return redirect('reg')
