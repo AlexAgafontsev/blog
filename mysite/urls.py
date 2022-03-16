@@ -22,10 +22,11 @@ urlpatterns += [
     path('post/<int:pk>/update/', views.PostUpdate.as_view(), name='post_update'),
     path('post/<int:pk>/delete/', views.PostDelete.as_view(), name='post_delete'),
 ]
+
+
 urlpatterns +=[
     path('reg', views.registr, name ='reg')
 ]
-
 
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),

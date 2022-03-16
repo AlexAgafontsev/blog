@@ -10,4 +10,19 @@
     </article>
     <hr>
     <a href="delete">delete</a>/<a href="update">Update</a>
+    <hr>
+    <h2>Comments</h2>
+    <form action="." method="post">
+    {{ comment_form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Add comment"></p>
+  </form>
+    <hr>
+{% for Comment in comment %}
+<font size="5">{{ Comment.name }}<br></font>
+<font size="4">{{ Comment.body }}<br></font>
+<a href="/user/{{Comment.author.id}}">{{ Comment.author }}</a><br>
+{{ Comment.date }}
+    <hr>
+    {% endfor %}
 {% endblock %}

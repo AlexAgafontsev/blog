@@ -1,18 +1,18 @@
 from django.contrib import admin
-
-from .models import Post
-
+from .models import Post,Comment
 
 
-admin.site.register(Post)
-
-from .models import Post
 
 
-class PostAuthor(admin.TabularInline):
-    model = Post
-    extra = 0
+class CommentsInline(admin.TabularInline):
+    model = Comment
+    extra = 0 #фиксит пустые значения копий книги"""
 
+
+@admin.register(Post)
+class CommentAdminn(admin.ModelAdmin):
+    list_display = ('title', 'author')
+    inlines = [CommentsInline]
 
 
 
